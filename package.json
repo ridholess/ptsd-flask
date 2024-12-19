@@ -1,0 +1,16 @@
+{
+  "name": "flask-euy",
+  "version": "1.0.0",
+  "description": "Aplikasi berbasis web untuk membantu pengguna melacak dan meningkatkan kesehatan mental mereka.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tailwind": "npx tailwindcss -i ./myApp/static/css/input.css -o ./myApp/static/css/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
