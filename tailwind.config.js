@@ -3,6 +3,9 @@ module.exports = {
     './myApp/templates/**/*.html',
   ],
   darkMode: 'class',
+  plugins: [
+    require('daisyui'),
+  ],
   theme: {
     container: {
       center: true,
