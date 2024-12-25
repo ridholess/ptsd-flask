@@ -9,6 +9,7 @@ instance/*
 
 ###TailwindCSS
 node_modules/
+.vscode/
 
 ### Flask.Python Stack ###
 # Byte-compiled / optimized / DLL files

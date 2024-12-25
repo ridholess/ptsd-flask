@@ -10,6 +10,29 @@
     <div class="py-10 bg-gray-50 sm:py-16 lg:py-24">
         <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div class="max-w-2xl mx-auto text-center">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        <div id="alert" role="alert" class="alert alert-success">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="h-6 w-6 shrink-0 stroke-current"
+                                fill="none"
+                                viewBox="0 0 24 24">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <span>{{ messages[0] }}</span>
+                        </div>
+                        <script>
+                            setTimeout(function() {
+                                    document.getElementById('alert').style.display = 'none';
+                            }, 1500);
+                        </script>
+                    {% endif %}
+                {% endwith %}
                 <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-4=5xl">Cek Kejiwaanmu</h2>
             </div>
     
@@ -33,7 +56,6 @@
                                             name="email"
                                             id="email"
                                             placeholder="Masukkan Email"
-                                            autocomplete="off"
                                             class="block w-full py-4 pl-10 pr-4 text-black placeholder-gray-500 transition-all duration-200 bg-white border border-gray-200 rounded-md focus:outline-none focus:border-blue-600 caret-blue-600"
                                         />
                                     </div>

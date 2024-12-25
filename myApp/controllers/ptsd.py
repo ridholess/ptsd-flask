@@ -1,72 +1,51 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-import mysql.connector
+from flask import render_template, request, redirect, url_for, session, flash, current_app
+from werkzeug.utils import secure_filename
+import os
 # from myApp.models.ptsd import PTSD
 
-
-auth_bp = Blueprint('auth', __name__)
-
-def get_db_connection():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="dbs_ptsd"
-    )
+from myApp.models.ptsd import (
+    getUserByEmail,
+    verifyPassword,
+    createUser
+)
 
 def index():
     return render_template('index.html')
-def admin():
-    return render_template('admin.html')
 
-@auth_bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
-
-        # Connect to the database
-        conn = get_db_connection()
-        cursor = conn.cursor()
-
-        # Query to check if the user exists
-        cursor.execute("SELECT * FROM user WHERE email=%s AND password=%s", (email, password))
-        user = cursor.fetchone()
-
-        # Authentication check
-        if user:
-            flash('Login successful!', 'success')
+        
+        user = getUserByEmail(email)
+        
+        if user and verifyPassword(user[3], password):
+            session['id_user'] = user[0]
+            session['nama'] = user[1]
+            session['email'] = user[2]
+            
+            flash('Selamat datang!', 'success')
             return redirect(url_for('admin'))
         else:
-            flash('Invalid email or password. Please try again.', 'danger')
-
-        # Close the connection
-        cursor.close()
-        conn.close()
-
+            flash('Gagal masuk. Coba lagi!', 'danger')
+    
     return render_template('login.html')
 
-@auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
         email = request.form['email']
         nama = request.form['nama']
         password = request.form['password']
-        created_at = request.form['created_at']
 
-        # Connect to the database
-        conn = get_db_connection()
-        cursor = conn.cursor()
-
-        # Query to insert the user
-        cursor.execute("INSERT INTO user (email, nama, password, created_at) VALUES (%s, %s, %s)", (email, nama, password, created_at))
-        conn.commit()
-
-        flash('Registration successful! You can now log in.', 'success')
-
-        # Close the connection
-        cursor.close()
-        conn.close()
-
-        return redirect(url_for('admin'))
-
+        createUser(nama, email, password)
+        
+        flash('Berhasil daftar! Silakan login.', 'success')
+        return redirect(url_for('login'))
     return render_template('register.html')
+
+def admin():
+    if 'id_user' not in session:
+        flash('Silakan login terlebih dahulu.', 'warning')
+        return redirect(url_for('login'))
+    
+    return render_template('admin.html')
