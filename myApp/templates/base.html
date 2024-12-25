@@ -53,9 +53,41 @@
                                     <!-- <span class="text-sm text-slate-400 dark:text-slate-800 lg:dark:text-slate-200 ml-2">dark</span> -->
                                 </div>
                             </li>
+                            
+                            {% if not session['id_user'] %}
                             <li class="group py-2">
                                 <a href="{{ url_for('login') }}" class="text-base font-semibold text-dark dark:text-white dark:hover:text-teal-400 bg-transparent hover:bg-white hover:text-teal-400 hover:shadow-lg hover:shadow-teal-500/50  hover:ring-0 py-2 px-4 rounded-md transition duration-300 ease-in-out">Masuk</a>
                             </li>
+                            {% endif %}
+                            
+                            {% if session['id_user'] %}
+                            <li class="group dropdown">
+                                <a tabindex="0" role="button" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex hover:text-teal-500">Akun</a>
+                                <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-40  shadow">
+                                    <li><a onclick="detailAkun.showModal()" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-2 flex hover:text-teal-500">Detail akun</a></li>
+                                    <li><a href="/logout" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-2 flex hover:text-teal-500">Logout</a></li>
+                                </ul>
+                                
+                            </li>
+                            <dialog id="detailAkun" class="modal">
+                                <div class="modal-box d-flex flex-col">
+                                    <h3 class="text-lg font-bold my-2">Detail Akun</h3>
+                                    <div class="flex-row my-2 gap-2 justify-center">
+                                        <span class="mr-4">Nama </span>
+                                        <span class="badge badge-accent p-[15px]">{{ session['nama'] }}</span>
+                                    </div>
+                                    <div class="flex-row my-2 gap-2 justify-center">
+                                        <span class="mr-4">Email </span>
+                                        <span class="badge badge-accent p-[15px]">{{ session['email'] }}</span>
+                                    </div>
+
+                                </div>
+                                <form method="dialog" class="modal-backdrop">
+                                  <button>close</button>
+                                </form>
+                            </dialog>
+                            {% endif %}
+
                         </ul>
                     </nav>
                 </div>

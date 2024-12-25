@@ -25,7 +25,7 @@ def login():
             session['email'] = user[2]
             
             flash('Selamat datang!', 'success')
-            return redirect(url_for('admin'))
+            return redirect(url_for('index'))
         else:
             flash('Gagal masuk. Coba lagi!', 'danger')
     
@@ -49,3 +49,11 @@ def admin():
         return redirect(url_for('login'))
     
     return render_template('admin.html')
+
+def logout():
+    session.pop('id_user', None)
+    session.pop('nama', None)
+    session.pop('email', None)
+    flash('Anda telah keluar.', 'success')
+    
+    return redirect(url_for('index'))

@@ -1,6 +1,37 @@
 {% extends 'base.html' %}
 {% block content %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, message in messages %}
+            <div id="alert" role="alert" class="alert 
+            {% if category == 'success' %} alert-success
+            {% elif category == 'danger' %} alert-error
+            {% elif category == 'warning' %} alert-warning
+            {% else %} alert-info
+            {% endif %} absolute d-flex w-[20%] top-[10%] right-4">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6 shrink-0 stroke-current"
+                    fill="none"
+                    viewBox="0 0 24 24">
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>{{ message }}</span>
+            </div>
+            <script>
+                setTimeout(function() {
+                        document.getElementById('alert').style.display = 'none';
+                }, 2000);
+            </script>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
      
+    
     <!-- Hero Section Start -->
     <section id="hero" class="pt-36">
         <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
@@ -9,7 +40,12 @@
                 <br><span class="italic">Menyerah</span> Jangan!!</h1>
                 <p class="my-8 dark:text-slate-400 leading-relaxed ">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maxime deserunt minima culpa labore eaque non corrupti consectetur illum officiis fuga fugiat quae quis, ratione tenetur perferendis quos ab! Reprehenderit rerum recusandae sequi! Dolorum, molestiae rem temporibus neque voluptates optio inventore?.</p>
               <div class="flex justify-center">
+                {% if not session['id_user'] %}
                 <a href="{{ url_for('register') }}" class="text-base font-semibold text-white bg-teal-500 py-3 px-8 rounded-full hover:shadow hover:bg-teal-400 transition duration-300 ease-in-out select-none">Coba Sekarang</a>
+                {% endif %}
+                {% if session['id_user'] %}
+                <a href="{{ url_for('register') }}" class="text-base font-semibold text-white bg-teal-500 py-3 px-8 rounded-full hover:shadow hover:bg-teal-400 transition duration-300 ease-in-out select-none">Tes Sekarang</a>
+                {% endif %}
               </div>
             </div>
           </div>

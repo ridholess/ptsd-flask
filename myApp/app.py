@@ -13,7 +13,15 @@ app.config['MYSQL_DB'] = 'dbs_ptsd'
 mysql  = MySQL(app)
 app.secret_key = 'secret'
 
-from myApp.controllers.ptsd import index as idx, login as lgn, register as rgt, admin as adm
+from myApp.controllers.ptsd import (
+    index as idx,
+    login as lgn,
+    register as rgt,
+    admin as adm,
+    logout as lgt
+)
+
+
 
 @app.route('/')
 def index():
@@ -30,3 +38,7 @@ def login():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     return rgt()
+
+@app.route('/logout')
+def logout():
+    return lgt()
