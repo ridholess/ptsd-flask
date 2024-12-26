@@ -17,8 +17,10 @@ from myApp.controllers.ptsd import (
     index as idx,
     login as lgn,
     register as rgt,
-    admin as adm,
-    logout as lgt
+    logout as lgt,
+    deteksi as dtk,
+    submit_test as st_test,
+    result_page as rslt
 )
 
 
@@ -26,10 +28,6 @@ from myApp.controllers.ptsd import (
 @app.route('/')
 def index():
     return idx()
-
-@app.route('/admin')
-def admin():
-    return adm()
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -42,3 +40,16 @@ def register():
 @app.route('/logout')
 def logout():
     return lgt()
+
+@app.route('/deteksi', methods=['GET', 'POST'])
+def deteksi():
+    return dtk()
+
+@app.route('/submit-test', methods=['GET', 'POST'])
+def handle_test_submission():
+    return st_test()
+
+@app.route('/result/<int:test_id>')
+def result_page(test_id):
+    return rslt(test_id)
+

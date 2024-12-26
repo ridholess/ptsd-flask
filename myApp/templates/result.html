@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- Hero Section Start -->
+<section id="hero" class="pt-36">
+    <div class="container mx-auto flex px-5 py-24 items-center justify-center flex-col">
+        <div class="text-center lg:w-2/3 w-full">
+            <h1 class="font-bold text-3xl mb-8 text-slate-900 dark:text-white py-2 md:text-4xl">Hasil tesmu sudah siap!</h1>
+            <div class="mx-auto mb-8 max-w-2xl text-center">
+                <div class="w-full mb-4 flex flex-col justify-center gap-2 py-2 px-4 bg-teal-400 rounded-lg">
+                    <span class="font-bold text-3xl text-slate-900 dark:text-white py-2 md:text-2xl">Post-Traumatic Stress Disorder Test Score</span>
+                </div>
+                <div class="w-2/3 mb-2 mx-auto flex flex-row justify-between gap-4 py-2 px-4  rounded-lg">
+                    <span class="font-bold text-xl text-slate-900 dark:text-white">
+                        0
+                    </span>
+                        <input type="range" min="0" max="80" value="{{ current_result[2] }}" class="range" disabled/>
+                    <span class="font-bold text-xl text-slate-900 dark:text-white">
+                        80
+                    </span>
+                </div>
+                <div class="w-2/3 mb-2 mx-auto grid grid-cols-1 gap-4  py-2 px-4">
+                    <p class="font-bold text-slate-900 dark:text-white py-2 text-lg">Skor anda <span class="badge badge-accent p-3 text-xl">{{ current_result[2] }}</span>  </p>
+                </div>
+                <div class="w-2/3 mb-2 mx-auto grid grid-cols-1 gap-4  py-2 px-4  rounded-lg bg-teal-400">
+                    <span class="font-bold text-slate-900 dark:text-white py-2 text-base">0-19 --- Tidak ada gejala</span>
+                    <span class="font-bold text-slate-900 dark:text-white py-2 text-base">20-64 --- Ada sedikit gejala PTSD</span>
+                    <span class="font-bold text-slate-900 dark:text-white py-2 text-base">65-80 --- Gejala PTSD kuat</span>
+                </div>
+            </div>
+            <div class="text-gray-600 body-font">
+                <div class="container mx-auto flex px-5 py-8 md:flex-row flex-col items-center">
+                  <div class="md:w-2/6 w-4/6 mb-10 md:mb-0">
+                    <img class="object-cover object-center rounded" alt="hero" src="{{ url_for('static', filename='images/vector1.svg') }}">
+                  </div>
+                  <div class="lg:flex-grow md:w-1/2 lg:pl-12 md:pl-8 flex flex-col md:items-start md:text-left items-center text-center">
+                    <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Tidak ada gejala
+                    </h1>
+                    <p class="mb-8 text-justify leading-relaxed">Anda tampak stabil dan berfungsi dengan baik. Jawaban Anda menunjukkan bahwa meskipun Anda mungkin jarang mengalami gejala yang berhubungan dengan <strong>PTSD</strong>, gejala tersebut kemungkinan tidak membahayakan kesehatan mental atau fungsi harian Anda.</p>
+                  </div>
+                </div>
+            </div>
+            <div class="text-gray-600 body-font">
+                <div class="container mx-auto flex px-5 py-8 md:flex-row flex-col  md:justify-between">
+                  <div class="lg:flex-grow md:w-1/2 lg:pr-12 md:pr-8 flex flex-col md:items-start md:text-left items-center text-center">
+                    <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Hal yang Perlu Diketahui
+                    </h1>
+                    <p class="mb-8 text-justify leading-relaxed">PTSD ditandai dengan gejala-gejala seperti tekanan emosional, ingatan yang mengganggu, kilas balik, insomnia, penghindaran, dan kewaspadaan berlebihan yang berlangsung setidaknya sebulan setelah kejadian traumatis.
+                    </p>
+                    <p class="mb-8 text-justify leading-relaxed">Tidak semua orang yang mengalami trauma mengalami PTSD. Misalnya, prevalensi PTSD di AS adalah 3,6 persen, meskipun setengah dari populasi AS mengalami setidaknya satu peristiwa traumatis dalam hidup mereka, menurut NIMH.
+                    </p>
+                    <p class="mb-8 text-justify leading-relaxed">Banyak perawatan yang dapat membantu individu pulih dari PTSD. Perawatan ini meliputi terapi dan pengobatan, termasuk terapi perilaku kognitif, psikoterapi dengan bantuan psikedelik, terapi pemaparan, dan desensitisasi gerakan mata serta pemrosesan ulang, dan lain sebagainya.
+                    </p>
+                  </div>
+                  <div class="md:w-2/6 w-4/6 mb-10 md:mb-0">
+                    <img class="object-cover object-center  rounded" alt="hero" src="{{ url_for('static', filename='images/vector3.svg') }}">
+                  </div>
+                </div>
+            </div>
+            <div class="text-gray-600 body-font">
+                <div class="container mx-auto flex px-5 py-8 md:flex-row flex-col items-center">
+                  <div class="md:w-1/6 w-4/6 mb-10 md:mb-0">
+                    <img class="object-cover object-center rounded" alt="hero" src="{{ url_for('static', filename='images/vector2.svg') }}">
+                  </div>
+                  <div class="lg:flex-grow md:w-5/6 lg:pl-12 md:pl-8 flex flex-col md:items-start md:text-left items-center text-center">
+                    <h1 class="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">Pencegahan lebih dini
+                    </h1>
+                    <div class="flex flex-wrap -m-4">
+                        <div class="p-4 md:w-2/4">
+                          <div class="flex rounded-lg h-full flex-col">
+                            <div class="flex items-center mb-3">
+                              <h2 class="text-gray-900 text-2xl title-font font-medium badge badge-accent py-4 px-3">Ketahanan Mental.</h2>
+                            </div>
+                            <div class="flex-grow">
+                              <p class="leading-relaxed text-base text-justify">Membangun ketahanan mental melalui eksplorasi, dukungan, dan banyak lagi membantu orang mengatasi keadaan yang menantang.</p>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="p-4 md:w-2/4">
+                          <div class="flex rounded-lg h-full flex-col">
+                            <div class="flex items-center mb-3">
+                              <h2 class="text-gray-900 text-2xl title-font font-medium badge badge-accent py-4 px-3">Mengatasi masalah.</h2>
+                            </div>
+                            <div class="flex-grow">
+                              <p class="leading-relaxed text-base text-justify">Aktivitas seperti perhatian penuh, napas dalam, penulisan jurnal, dan dukungan sosial dapat membantu mengatasi kecemasan pascatrauma.</p>
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+      </div>
+</section>
+<!-- Hero Section End -->
+
+{% endblock %}

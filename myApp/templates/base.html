@@ -15,7 +15,7 @@
         <div class="container">
             <div class="flex items-center justify-between relative">
                 <div class="px-4">
-                    <a href="#hero" class="font-bold text-teal-400 text-lg block py-6">pTsD</a>
+                    <a href="/" class="font-bold text-teal-400 text-lg block py-6">pTsD</a>
                 </div>
                 <div class="flex items-center px-4">
                     <button id="hamburger" name="hamburger" type="button" class="block absolute right-4 lg:hidden">
@@ -26,12 +26,10 @@
 
                     <nav id="nav-menu" class="hidden absolute py-5 bg-white dark:shadow-lg dark:shadow-teal-100/40 lg:dark:shadow-none max-w-[250px] w-full shadow-lg rounded-b-lg right-4 top-full lg:max-w-full lg:block lg:static lg:bg-transparent lg:dark:bg-transparent lg:shadow-none lg:rounded-none">
                         <ul class="block lg:flex lg:bg-transparent lg:dark:bg-transparent ">
+                            {% if not session['id_user'] %}
                             <li class="group">
                                 <a href="#hero" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex group-hover:text-teal-500">Beranda</a>
                             </li>
-                            <!-- <li class="group">
-                                <a href="#about" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex group-hover:text-teal-500">Tentang Saya</a>
-                            </li> -->
                             <li class="group">
                                 <a href="#howitworks" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex group-hover:text-teal-500">Cara Kerja</a>
                             </li>
@@ -41,6 +39,25 @@
                             <li class="group">
                                 <a href="#contact" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex group-hover:text-teal-500">Kontak</a>
                             </li>
+                            {% endif %}
+                            {% if session['id_user'] %}
+                            <li class="group">
+                                <a href="/" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex group-hover:text-teal-500">Beranda</a>
+                            </li>
+                            <li class="group">
+                                <a href="{{ url_for('index') }}#howitworks" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex group-hover:text-teal-500">Cara Kerja</a>
+                            </li>
+                            <li class="group">
+                                <a href="{{ url_for('index') }}#about" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex group-hover:text-teal-500">Layanan Kami</a>
+                            </li>
+                            <li class="group">
+                                <a href="{{ url_for('index') }}#contact" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex group-hover:text-teal-500">Kontak</a>
+                            </li>
+                            <li class="group">
+                                <a href="/deteksi" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex group-hover:text-teal-500">Deteksi</a>
+                            </li>
+                            {% endif %}
+
                             <li class="flex items-center py-2">
                                 <div class="flex ml-24 mr-4">
                                     <!-- <span class="text-sm text-slate-400 dark:text-slate-800 lg:dark:text-slate-200 mr-2">light</span> -->
@@ -65,6 +82,7 @@
                                 <a tabindex="0" role="button" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex hover:text-teal-500">Akun</a>
                                 <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-40  shadow">
                                     <li><a onclick="detailAkun.showModal()" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-2 flex hover:text-teal-500">Detail akun</a></li>
+                                    <li><a onclick="riwayatTest.showModal()" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-2 flex hover:text-teal-500">Riwayat tes</a></li>
                                     <li><a href="/logout" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-2 flex hover:text-teal-500">Logout</a></li>
                                 </ul>
                                 
@@ -79,6 +97,44 @@
                                     <div class="flex-row my-2 gap-2 justify-center">
                                         <span class="mr-4">Email </span>
                                         <span class="badge badge-accent p-[15px]">{{ session['email'] }}</span>
+                                    </div>
+
+                                </div>
+                                <form method="dialog" class="modal-backdrop">
+                                  <button>close</button>
+                                </form>
+                            </dialog>
+                            <dialog id="riwayatTest" class="modal">
+                                <div class="modal-box w-11/12 max-w-5xl d-flex flex-col">
+                                    <h3 class="text-lg font-bold my-2">Riwayat Tes</h3>
+                                    
+                                    <div class="overflow-x-auto">
+                                        <table class="table table-lg table-zebra">
+                                          <!-- head -->
+                                          <thead>
+                                            <tr>
+                                              <th>No.</th>
+                                              <th>Tanggal</th>
+                                              <th>Skor</th>
+                                              <th>Status</th>
+                                              <th>Aksi</th>
+                                            </tr>
+                                          </thead>
+                                          <tbody>
+                                            {% for result in results %}
+                                            <tr>
+                                              <th>{{ loop.index }}</th>
+                                              <td>{{ result[4] }}</td>
+                                              <td>{{ result[2] }}</td>
+                                              <!-- <td>{{ result[1] }}</td> -->
+                                              <td>{{ result[3] }}</td>
+                                              <td>
+                                                <a href="{{ url_for('result_page', test_id=result[0]) }}" class="badge badge-accent">Lihat</a>
+                                            </td>
+                                            </tr>
+                                            {% endfor %}
+                                          </tbody>
+                                        </table>
                                     </div>
 
                                 </div>
