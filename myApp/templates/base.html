@@ -80,7 +80,7 @@
                             {% if session['id_user'] %}
                             <li class="group dropdown">
                                 <a tabindex="0" role="button" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-8 flex hover:text-teal-500">Akun</a>
-                                <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-[1] w-40  shadow">
+                                <ul tabindex="0" class="bg-teal-50 dark:bg-dark dropdown-content menu bg-base-100 rounded-box z-[1] w-40  shadow">
                                     <li><a onclick="detailAkun.showModal()" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-2 flex hover:text-teal-500">Detail akun</a></li>
                                     <li><a onclick="riwayatTest.showModal()" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-2 flex hover:text-teal-500">Riwayat tes</a></li>
                                     <li><a href="/logout" class="text-base text-slate-800 dark:text-slate-800 lg:dark:text-teal-300 font-semibold py-2 mx-2 flex hover:text-teal-500">Logout</a></li>
@@ -105,13 +105,13 @@
                                 </form>
                             </dialog>
                             <dialog id="riwayatTest" class="modal">
-                                <div class="modal-box w-11/12 max-w-5xl d-flex flex-col">
-                                    <h3 class="text-lg font-bold my-2">Riwayat Tes</h3>
+                                <div class="bg-white dark:bg-dark  modal-box w-11/12 max-w-5xl d-flex flex-col">
+                                    <h3 class="text-xl font-bold mx-auto text-slate-600">Riwayat Tes</h3>
                                     
                                     <div class="overflow-x-auto">
                                         <table class="table table-lg table-zebra">
                                           <!-- head -->
-                                          <thead>
+                                          <thead class="text-slate-700">
                                             <tr>
                                               <th>No.</th>
                                               <th>Tanggal</th>
