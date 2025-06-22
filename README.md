@@ -11,7 +11,7 @@ Setelah menyelesaikan kuesioner, pengguna akan langsung menerima hasil diagnosis
 
 ## Cara Menjalankan
 1. Buat virtual environment dan aktifkan. <br>
-*jika belum install venv `pip install virtualenv`
+*jika belum install venv `pip install virtualenv` <br>
 *lalu `virtualenv venv` => `venv\Scripts\activate`
 2. Instal dependensi dengan `pip install -r requirements.txt`.
 3. Jalankan aplikasi menggunakan `flask run` / `flask run --debug` (running sambil edit).
@@ -44,9 +44,10 @@ Dalam proyek ini, saya fokus pada pengembangan tampilan statis menggunakan HTML,
 | | | - result.html
 | - app.py
 - .gitignore
+- README.md
 - app.py
 - .package-lock.json
 - .package.json
 - requirements.txt
-- README.md
+- tailwind.config.js
 ```
