@@ -6,6 +6,7 @@ instance/*
 !instance/.gitignore
 .webassets-cache
 .env
+.venv
 
 ###TailwindCSS
 node_modules/
